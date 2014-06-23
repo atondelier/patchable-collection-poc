@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/fast-json-patch/src/json-patch.js"></script>
+    <script src="/bower_components/fast-json-patch/src/json-patch-duplex.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div ng-app="App" ng-controller="MainCtrl as mainCtrl">
+      <form>
+          <ul>
+            <li ng-repeat="reservation in ReservationList">
+              <ng-form>
+                  <input ng-model="reservation.firstName"/>
+                  <input ng-model="reservation.lastName"/>
+              </ng-form>
+                <pre ng-bind="reservation.getPatches() | json"></pre>
+            </li>
+          </ul>
+       </form>
+
+       <button ng-click="mainCtrl.pushChild()">Push</button>
+       <button ng-click="mainCtrl.storePatches()">Store patches</button>
+       <button ng-click="mainCtrl.syncPatches()">Sync patches</button>
+    </div>
+  </body>
+</html>
